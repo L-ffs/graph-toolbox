@@ -5,24 +5,7 @@
 #include <vector>
 #include <unordered_map>
 
-class ListGraph
-{
-private:
-    std::unordered_map<std::string, ListEdge> graph;
-public:
-    ListGraph(std::string node, std::vector<ListEdge> Edges);
-    void appendNode(std::string node);
-    void appendEdge(std::string originNode, std::string TargetNode, size_t value, bool targeted= false);
-    ~ListGraph();
-};
 
-ListGraph::ListGraph(/* args */)
-{
-}
-
-ListGraph::~ListGraph()
-{
-}
 
 class ListEdge
 {
@@ -47,6 +30,29 @@ ListEdge::~ListEdge(){}
 std::string ListEdge::getName(){}
 
 size_t ListEdge::getValue(){}
+
+
+
+
+class ListGraph
+{
+private:
+    std::unordered_map<std::string, ListEdge> graph;
+public:
+    ListGraph(std::string node, std::vector<ListEdge> Edges);
+    void appendNode(std::string node);
+    void appendEdge(std::string originNode, std::string TargetNode, size_t value, bool targeted= false);
+    ~ListGraph();
+};
+
+ListGraph::ListGraph(std::string node, std::vector<ListEdge> Edges)
+{
+}
+
+ListGraph::~ListGraph()
+{
+}
+
 
 
 
