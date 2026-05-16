@@ -36,13 +36,16 @@ public:
     void appendEdge(std::string originNode, std::string TargetNode, size_t value, bool targeted= false);
 
     void printAdjacencyList() const;
-    
+
     bool existsEdge(std::string originNode, std::string TargetNode);
 
     void changeEdgeValue(std::string originNode, std::string TargetNode, size_t newValue);
 
     void deleteEdge(std::string originNode, std::string targetNode, bool targeted= false);
+
+    void deleteNode(std::string node);
     
+    std::vector<std::string> listNeighbors(std::string node);
 };
 
 

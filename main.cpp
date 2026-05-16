@@ -28,5 +28,12 @@ int main() {
     graph.printAdjacencyList();
     std::cout <<"\n\n";
 
+    graph.deleteNode("node1");
+
+    std::cout <<"\n\n";
+    graph.printAdjacencyList();
+    std::cout <<"\n\n";
+
+
     return 0;
 }

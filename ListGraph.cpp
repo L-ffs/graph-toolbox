@@ -48,7 +48,7 @@ void ListGraph::printAdjacencyList() const{
     }
 }
 
-    bool ListGraph::existsEdge(std::string originNode, std::string TargetNode) {
+bool ListGraph::existsEdge(std::string originNode, std::string TargetNode) {
 
         for ( ListEdge edge : graph[originNode]) {
             if (edge.trgt_name == TargetNode) {
@@ -56,7 +56,8 @@ void ListGraph::printAdjacencyList() const{
             }
         }
         return false;
-    }
+}
+
 void ListGraph::changeEdgeValue(std::string originNode, std::string TargetNode, size_t newValue) {
 
     for (ListEdge &e : graph[originNode]) { //graph[originNode] é um vector
@@ -115,3 +116,43 @@ void ListGraph::deleteEdge(std::string originNode, std::string targetNode, bool 
     }
     }
 }
+
+void ListGraph::deleteNode(std::string node) {
+    
+    
+    std::vector<std::string> neighbors;
+    for (auto pair : graph) {
+        if (pair.first == node){continue;} 
+
+        for (auto edge : pair.second) {
+            
+            if (edge.trgt_name == node) {
+
+                neighbors.push_back(pair.first);
+                break;
+            }
+        }
+    }
+    for (auto nodes : neighbors) {
+
+        deleteEdge(nodes, node, true); //targeted= true pra evitar operaçoes desnecessarias
+    }
+
+    graph.erase(node);
+
+}
+
+std::vector<std::string> ListGraph::listNeighbors(std::string node) {
+
+    std::vector<std::string> neighbors;
+    
+    for (auto edge : graph[node]) {
+        
+        if (edge.trgt_name == node) {continue;}
+        
+        neighbors.push_back(edge.trgt_name);
+    }
+    
+    return neighbors;
+}
+
