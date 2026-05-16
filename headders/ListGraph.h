@@ -7,52 +7,30 @@
 
 
 
-class ListEdge
-{
-private:
+class ListEdge {
+public:
 
     //escolhida representaçoes menos eficientes em memoria visando a didatica da representaçao
     std::string trgt_name;
     size_t value;
 
-
-public:
-    ListEdge(std::string trgt_name, size_t value);
-    ~ListEdge();
-    std::string getName();
-    size_t getValue();
 };
 
-ListEdge::ListEdge(std::string trgt_name, size_t value){}
 
-ListEdge::~ListEdge(){}
-
-std::string ListEdge::getName(){}
-
-size_t ListEdge::getValue(){}
-
-
-
-
-class ListGraph
-{
+class ListGraph {
 private:
-    std::unordered_map<std::string, ListEdge> graph;
+
+    std::unordered_map<std::string, std::vector<ListEdge>> graph; //nome dos nos e sua lista de arestas
+
 public:
-    ListGraph(std::string node, std::vector<ListEdge> Edges);
+
+    ListGraph();
     void appendNode(std::string node);
     void appendEdge(std::string originNode, std::string TargetNode, size_t value, bool targeted= false);
+    void printAdjacencyList() const;
     ~ListGraph();
+    
 };
-
-ListGraph::ListGraph(std::string node, std::vector<ListEdge> Edges)
-{
-}
-
-ListGraph::~ListGraph()
-{
-}
-
 
 
 
