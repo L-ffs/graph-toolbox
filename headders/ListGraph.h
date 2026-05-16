@@ -13,6 +13,9 @@ public:
     //escolhida representaçoes menos eficientes em memoria visando a didatica da representaçao
     std::string trgt_name;
     size_t value;
+    bool operator==(const ListEdge &other) { //operador usado pelo trecho de IA
+        return (trgt_name == other.trgt_name && value == other.value);
+    }
 
 };
 
@@ -20,15 +23,25 @@ public:
 class ListGraph {
 private:
 
-    std::unordered_map<std::string, std::vector<ListEdge>> graph; //nome dos nos e sua lista de arestas
+    std::unordered_map<std::string, std::vector<ListEdge>> graph; //map [chave]= valor de nós e sua lista de arestas
 
 public:
 
     ListGraph();
-    void appendNode(std::string node);
-    void appendEdge(std::string originNode, std::string TargetNode, size_t value, bool targeted= false);
-    void printAdjacencyList() const;
+
     ~ListGraph();
+    
+    void appendNode(std::string node);
+
+    void appendEdge(std::string originNode, std::string TargetNode, size_t value, bool targeted= false);
+
+    void printAdjacencyList() const;
+    
+    bool existsEdge(std::string originNode, std::string TargetNode);
+
+    void changeEdgeValue(std::string originNode, std::string TargetNode, size_t newValue);
+
+    void deleteEdge(std::string originNode, std::string targetNode, bool targeted= false);
     
 };
 

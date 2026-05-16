@@ -1,5 +1,6 @@
 #include "headders/ListGraph.h"
 #include <iostream>
+#include <algorithm>
 
 ListGraph::ListGraph(){
 }
@@ -44,5 +45,73 @@ void ListGraph::printAdjacencyList() const{
             }
         }
         std::cout << std::endl;
+    }
+}
+
+    bool ListGraph::existsEdge(std::string originNode, std::string TargetNode) {
+
+        for ( ListEdge edge : graph[originNode]) {
+            if (edge.trgt_name == TargetNode) {
+                return true;
+            }
+        }
+        return false;
+    }
+void ListGraph::changeEdgeValue(std::string originNode, std::string TargetNode, size_t newValue) {
+
+    for (ListEdge &e : graph[originNode]) { //graph[originNode] é um vector
+        if (e.trgt_name == TargetNode) {
+            e.value= newValue;
+            break;
+        }
+    }
+    for (ListEdge &e : graph[TargetNode]) { 
+        if (e.trgt_name == originNode) {
+            e.value= newValue;
+            return;
+        }
+    }
+    std::cout << "falha ao alterar valor de aresta [" << originNode << "," << TargetNode << "]. aresta nao encontrada\n";
+    exit(-1); 
+}
+
+void ListGraph::deleteEdge(std::string originNode, std::string targetNode, bool targeted){
+
+    for (ListEdge &edge : graph[originNode]) {
+        if (edge.trgt_name == targetNode) {
+            
+            //trecho de codigo de IA
+            auto it = std::find(graph[originNode].begin(), graph[originNode].end(), edge);
+
+            if (it != graph[originNode].end()) {
+                // 2. Move todos os elementos após o "30" uma casa para a esquerda
+                // Isso joga o valor que estava no fim para a última posição de forma segura
+                std::move(it + 1, graph[originNode].end(), it);
+
+                // 3. Remove fisicamente o último elemento
+                graph[originNode].pop_back(); 
+            }
+
+        }
+    }
+    if (!targeted) {
+       
+        for (ListEdge &edge : graph[targetNode]) {
+        if (edge.trgt_name == originNode) {
+            
+            //trecho de codigo de IA
+            auto it = std::find(graph[targetNode].begin(), graph[targetNode].end(), edge);
+
+            if (it != graph[targetNode].end()) {
+                // 2. Move todos os elementos após o "30" uma casa para a esquerda
+                // Isso joga o valor que estava no fim para a última posição de forma segura
+                std::move(it + 1, graph[targetNode].end(), it);
+
+                // 3. Remove fisicamente o último elemento
+                graph[targetNode].pop_back(); 
+            }
+
+        }
+    }
     }
 }
