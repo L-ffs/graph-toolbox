@@ -1,39 +1,22 @@
 #include <iostream>
-#include "headders/ListGraph.h"
+#include "headders/Graph.h"
+
 
 int main() {
-    std::cout << "hrllo world\n";
     
-    ListGraph graph= ListGraph();
 
-    graph.appendNode("node1");
-    graph.appendNode("node@");
-    graph.appendEdge("node1", "node@", 10, false);
+    Graph graph(Representation::MATRIX, true, true);
 
-    std::cout <<"\n\n";
-    graph.printAdjacencyList();
-    std::cout <<"\n\n";
+    graph.runTests();
 
-    std::cout << "a aresta [node1, node@] existe? " << (graph.existsEdge("node1", "node@") ? "sim" : "nao") << "\n\n";
 
-    graph.changeEdgeValue("node1", "node@", 3);
+    // ListGraph Lgraph= ListGraph();
 
-    std::cout <<"\n\n";
-    graph.printAdjacencyList();
-    std::cout <<"\n\n";
+    // Lgraph.runIntensiveTests();
 
-    graph.deleteEdge("node1", "node@", true);
-
-    std::cout <<"\n\n";
-    graph.printAdjacencyList();
-    std::cout <<"\n\n";
-
-    graph.deleteNode("node1");
-
-    std::cout <<"\n\n";
-    graph.printAdjacencyList();
-    std::cout <<"\n\n";
-
+    // MatrixGraph Mgraph;
+    
+    // Mgraph.runIntensiveTests();
 
     return 0;
 }
