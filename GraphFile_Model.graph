@@ -1,0 +1,7 @@
+(tipo: matriz)
+(direcionado: sim)
+(ponderado: sim)
+
+((A) (->) (B) (45))
+((B) (->) (C) (12))
+((C) (->) (A) (30))
