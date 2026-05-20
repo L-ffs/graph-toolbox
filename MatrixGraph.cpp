@@ -5,7 +5,7 @@
 MatrixGraph::MatrixGraph() {}
 MatrixGraph::~MatrixGraph() {}
 
-// 1. Adicionar um Nó
+//Adicionar um Nó
 void MatrixGraph::appendNode(std::string node) {
     // Inicializa a linha do novo nó vazia
     graph[node] = std::unordered_map<std::string, size_t>();
@@ -19,7 +19,7 @@ void MatrixGraph::appendNode(std::string node) {
     }
 }
 
-// 2. Adicionar uma Aresta
+//Adicionar uma Aresta
 void MatrixGraph::appendEdge(std::string originNode, std::string TargetNode, size_t value, bool targeted) {
     graph[originNode][TargetNode] = value;
 
@@ -28,7 +28,7 @@ void MatrixGraph::appendEdge(std::string originNode, std::string TargetNode, siz
     }
 }
 
-// 3. Imprimir a Matriz de Adjacência
+//Imprimir a Matriz de Adjacência
 void MatrixGraph::printAdjacencyMatrix() const {
     if (graph.empty()) {
         std::cout << "Grafo vazio." << std::endl;
@@ -44,7 +44,7 @@ void MatrixGraph::printAdjacencyMatrix() const {
 
     // Imprime as linhas da matriz
     for (const auto& rowPair : graph) {
-        std::cout << rowPair.first << "\t"; // Nome do nó da linha
+        std::cout << rowPair.first << "\t"; //Nome do no da linha
         for (const auto& colPair : graph) {
             // Busca o peso para a interseção da linha atual com a coluna atual
             auto it = rowPair.second.find(colPair.first);
@@ -58,16 +58,15 @@ void MatrixGraph::printAdjacencyMatrix() const {
     }
 }
 
-// 4. Verificar se a Aresta Existe
+//Verificar se a Aresta Existe
 bool MatrixGraph::existsEdge(std::string originNode, std::string TargetNode) {
-    // Se o nó de origem existe e o peso para o destino for maior que 0, a aresta existe
     if (graph.count(originNode) && graph[originNode].count(TargetNode)) {
         return graph[originNode][TargetNode] > 0;
     }
     return false;
 }
 
-// 5. Alterar o Valor (Peso) de uma Aresta
+//Alterar o Valor (Peso) de uma Aresta
 void MatrixGraph::changeEdgeValue(std::string originNode, std::string TargetNode, size_t newValue) {
     bool updated = false;
 
@@ -88,7 +87,7 @@ void MatrixGraph::changeEdgeValue(std::string originNode, std::string TargetNode
     }
 }
 
-// 6. Deletar uma Aresta
+//Deletar uma Aresta
 void MatrixGraph::deleteEdge(std::string originNode, std::string targetNode, bool targeted) {
     // Na matriz, deletar significa voltar o peso para 0
     if (graph.count(originNode)) {
@@ -100,18 +99,18 @@ void MatrixGraph::deleteEdge(std::string originNode, std::string targetNode, boo
     }
 }
 
-// 7. Deletar um Nó por Completo
+//Deletar um Nó por Completo
 void MatrixGraph::deleteNode(std::string node) {
-    // 1. Remove a linha inteira do nó
+    //Remove a linha inteira do no
     graph.erase(node);
 
-    // 2. Varre as linhas dos outros nós para remover a coluna referente a este nó
+    //Varre as linhas dos outros nós para remover a coluna referente a este no
     for (auto& pair : graph) {
         pair.second.erase(node);
     }
 }
 
-// 8. Listar os Vizinhos de um Nó
+//Listar os Vizinhos de um Nó
 std::vector<std::string> MatrixGraph::listNeighbors(std::string node) {
     std::vector<std::string> neighbors;
 
@@ -120,10 +119,10 @@ std::vector<std::string> MatrixGraph::listNeighbors(std::string node) {
             std::string targetNode = pair.first;
             size_t weight = pair.second;
 
-            // Pula loops (nó apontando para si mesmo) se quiser o mesmo comportamento da sua lista
+            // Pula loops (nó apontando para si mesmo)
             if (targetNode == node) continue;
 
-            // Se o peso for maior que 0, significa que há uma conexão (vizinho)
+            // Se o peso for maior que 0, significa que há uma conexão
             if (weight > 0) {
                 neighbors.push_back(targetNode);
             }

@@ -39,6 +39,10 @@ public:
 
     std::vector<std::string> listNeighbors(std::string node);
 
+    size_t outdegree(); //a implementar
+
+    quebra proposital pra alerta
+
     //metodo implementado por IA, mas revisado
     void runIntensiveTests();
 };
