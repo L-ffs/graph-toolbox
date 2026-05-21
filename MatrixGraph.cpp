@@ -136,6 +136,7 @@ std::vector<std::string> MatrixGraph::listNeighbors(std::string node) {
 
 //roda testes da classe
 void MatrixGraph::runIntensiveTests() {
+
     //metodo implementado por IA, mas revisado
     std::cout << "====================================================\n";
     std::cout << "  INICIANDO TESTES INTENSIVOS (MatrixGraph)         \n";
@@ -234,4 +235,50 @@ void MatrixGraph::runIntensiveTests() {
     std::cout << "\n====================================================\n";
     std::cout << "  PARABENS! TODOS OS TESTES PASSARAM COM SUCESSO! 🎉 \n";
     std::cout << "====================================================\n\n";
+}
+
+
+//grau de Saída
+size_t MatrixGraph::outDegree(std::string node) {
+    // Se o nó não existir no grafo, o grau é zero
+    if (graph.count(node) == 0) return 0;
+    
+    size_t degree = 0;
+    for (const auto& edge : graph.at(node)) {
+        // Na nossa matriz, peso > 0 significa que a aresta realmente existe
+        if (!edge.second > 0) {
+            degree++;
+        }
+    }
+    return degree;
+}
+
+//grau de Entrada (auxiliada por IA na logica)
+size_t MatrixGraph::inDegree(std::string node) {
+
+    if (graph.count(node) == 0) return 0;
+
+    size_t degree = 0;
+
+    for (const auto& rowPair : graph) {
+        std::string originNode = rowPair.first;
+        
+        // Verificamos se esse nó de origem tem uma aresta apontando para o nosso 'node' alvo
+        auto it = rowPair.second.find(node);
+        if (it != rowPair.second.end() && it->second > 0) {
+            degree++;
+        }
+    }
+    return degree;
+}
+
+//adjacência
+bool MatrixGraph::adjacent(std::string node1, std::string node2) {
+
+    if (graph.count(node1) == 0 || graph.count(node2) == 0) return false;
+
+    bool _1to2 = graph.at(node1).count(node2) && graph.at(node1).at(node2) > 0;
+    bool _2to1 = graph.at(node2).count(node1) && graph.at(node2).at(node1) > 0;
+
+    return (_1to2 || _2to1);
 }

@@ -103,3 +103,36 @@ void Graph::runTests() {
         matrixGraph->runIntensiveTests();
     }
 }
+
+
+size_t Graph::outDegree(std::string node) {
+    if (repType == Representation::LIST) {
+
+        std::cout << "funçao nao implementada para esse tipo de estrutura";
+        exit(-1);
+        
+    } else {
+        return matrixGraph->outDegree(node);
+    }
+}
+size_t Graph::inDegree(std::string node) {
+
+    if (repType == Representation::LIST) {
+        std::cout << "funçao nao implementada para esse tipo de estrutura";
+        exit(-1);
+    } else {
+        return matrixGraph->inDegree(node);
+    }
+}
+bool Graph::adjacent(std::string node1, std::string node2) {
+
+    if (repType == Representation::LIST) {
+        
+        std::cout << "funçao nao implementada para esse tipo de estrutura";
+        exit(-1);
+    } else {
+        return matrixGraph->adjacent(node1, node2);
+    }
+}
+
+

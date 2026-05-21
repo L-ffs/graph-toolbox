@@ -30,6 +30,10 @@ public:
     void deleteNode(std::string node);
     std::vector<std::string> listNeighbors(std::string node);
     void runTests();
+    size_t outDegree(std::string node);
+    size_t inDegree(std::string node);
+    bool adjacent(std::string node1, std::string node2);
+
 };
 
 
