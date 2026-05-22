@@ -6,21 +6,21 @@ MatrixGraph::MatrixGraph() {}
 MatrixGraph::~MatrixGraph() {}
 
 //Adicionar um Nó
-void MatrixGraph::appendNode(std::string node) {
+void MatrixGraph::appendNode(int node) {
     // Inicializa a linha do novo nó vazia
-    graph[node] = std::unordered_map<std::string, size_t>();
+    graph[node] = std::unordered_map<int, size_t>();
     
     // Para manter as propriedades de matriz quadrada, garantimos que todos os
     // nós conheçam esse novo nó com peso 0 (sem aresta), e vice-versa.
     for (auto& pair : graph) {
-        std::string existingNode = pair.first;
+        int existingNode = pair.first;
         graph[node][existingNode] = 0;
         graph[existingNode][node] = 0;
     }
 }
 
 //Adicionar uma Aresta
-void MatrixGraph::appendEdge(std::string originNode, std::string TargetNode, size_t value, bool targeted) {
+void MatrixGraph::appendEdge(int originNode, int TargetNode, size_t value, bool targeted) {
     graph[originNode][TargetNode] = value;
 
     if (!targeted) {
@@ -59,7 +59,7 @@ void MatrixGraph::printAdjacencyMatrix() const {
 }
 
 //Verificar se a Aresta Existe
-bool MatrixGraph::existsEdge(std::string originNode, std::string TargetNode) {
+bool MatrixGraph::existsEdge(int originNode, int TargetNode) {
     if (graph.count(originNode) && graph[originNode].count(TargetNode)) {
         return graph[originNode][TargetNode] > 0;
     }
@@ -67,7 +67,7 @@ bool MatrixGraph::existsEdge(std::string originNode, std::string TargetNode) {
 }
 
 //Alterar o Valor (Peso) de uma Aresta
-void MatrixGraph::changeEdgeValue(std::string originNode, std::string TargetNode, size_t newValue) {
+void MatrixGraph::changeEdgeValue(int originNode, int TargetNode, size_t newValue) {
     bool updated = false;
 
     if (existsEdge(originNode, TargetNode)) {
@@ -88,7 +88,7 @@ void MatrixGraph::changeEdgeValue(std::string originNode, std::string TargetNode
 }
 
 //Deletar uma Aresta
-void MatrixGraph::deleteEdge(std::string originNode, std::string targetNode, bool targeted) {
+void MatrixGraph::deleteEdge(int originNode, int targetNode, bool targeted) {
     // Na matriz, deletar significa voltar o peso para 0
     if (graph.count(originNode)) {
         graph[originNode][targetNode] = 0;
@@ -100,7 +100,7 @@ void MatrixGraph::deleteEdge(std::string originNode, std::string targetNode, boo
 }
 
 //Deletar um Nó por Completo
-void MatrixGraph::deleteNode(std::string node) {
+void MatrixGraph::deleteNode(int node) {
     //Remove a linha inteira do no
     graph.erase(node);
 
@@ -111,12 +111,12 @@ void MatrixGraph::deleteNode(std::string node) {
 }
 
 //Listar os Vizinhos de um Nó
-std::vector<std::string> MatrixGraph::listNeighbors(std::string node) {
-    std::vector<std::string> neighbors;
+std::vector<int> MatrixGraph::listNeighbors(int node) {
+    std::vector<int> neighbors;
 
     if (graph.count(node)) {
         for (const auto& pair : graph[node]) {
-            std::string targetNode = pair.first;
+            int targetNode = pair.first;
             size_t weight = pair.second;
 
             // Pula loops (nó apontando para si mesmo)
@@ -145,11 +145,11 @@ void MatrixGraph::runIntensiveTests() {
     // -----------------------------------------------------
     // Teste 1: Inserção de Nós
     // -----------------------------------------------------
-    std::cout << "[Teste 1] Inserindo nos (A, B, C, D)... ";
-    appendNode("A");
-    appendNode("B");
-    appendNode("C");
-    appendNode("D");
+    std::cout << "[Teste 1] Inserindo nos (1, 2, 3, 4)... ";
+    appendNode(1);
+    appendNode(2);
+    appendNode(3);
+    appendNode(4);
     std::cout << "OK!\n";
     printAdjacencyMatrix();
 
@@ -157,18 +157,18 @@ void MatrixGraph::runIntensiveTests() {
     // Teste 2: Inserção de Arestas e Direcionamento
     // -----------------------------------------------------
     std::cout << "[Teste 2] Configurando arestas (Dir. e Nao-Dir.)... ";
-    // Aresta não-direcionada entre A e B (peso 10)
-    appendEdge("A", "B", 10, false); 
-    // Aresta direcionada de B para C (peso 20)
-    appendEdge("B", "C", 20, true);  
-    // Aresta não-direcionada entre C e D (peso 30)
-    appendEdge("C", "D", 30, false); 
+    // Aresta não-direcionada entre 1 e 2 (peso 10)
+    appendEdge(1, 2, 10, false); 
+    // Aresta direcionada de 2 para 3 (peso 20)
+    appendEdge(2, 3, 20, true);  
+    // Aresta não-direcionada entre 3 e 4 (peso 30)
+    appendEdge(3, 4, 30, false); 
 
     // Validações com assert
-    assert(existsEdge("A", "B") == true);
-    assert(existsEdge("B", "A") == true);  // Deve ser true pois não é direcionada
-    assert(existsEdge("B", "C") == true);
-    assert(existsEdge("C", "B") == false); // Deve ser false pois é direcionada B -> C
+    assert(existsEdge(1, 2) == true);
+    assert(existsEdge(2, 1) == true);  // Deve ser true pois não é direcionada
+    assert(existsEdge(2, 3) == true);
+    assert(existsEdge(3, 2) == false); // Deve ser false pois é direcionada 2 -> 3
     std::cout << "OK!\n";
     printAdjacencyMatrix();
 
@@ -176,12 +176,12 @@ void MatrixGraph::runIntensiveTests() {
     // Teste 3: Alteração de Valores (Pesos)
     // -----------------------------------------------------
     std::cout << "[Teste 3] Alterando pesos de arestas... ";
-    changeEdgeValue("A", "B", 99);
-    changeEdgeValue("B", "C", 50);
+    changeEdgeValue(1, 2, 99);
+    changeEdgeValue(2, 3, 50);
     
     // Garantindo que elas ainda existem após a alteração
-    assert(existsEdge("A", "B") == true);
-    assert(existsEdge("B", "C") == true);
+    assert(existsEdge(1, 2) == true);
+    assert(existsEdge(2, 3) == true);
     std::cout << "OK!\n";
     printAdjacencyMatrix();
 
@@ -189,13 +189,13 @@ void MatrixGraph::runIntensiveTests() {
     // Teste 4: Listagem de Vizinhos
     // -----------------------------------------------------
     std::cout << "[Teste 4] Verificando vizinhos dos nos... ";
-    // Vizinhos de A deve ser apenas o B
-    std::vector<std::string> vizinhosA = listNeighbors("A");
+    // Vizinhos de 1 deve ser apenas o 2
+    std::vector<int> vizinhosA = listNeighbors(1);
     assert(vizinhosA.size() == 1);
-    assert(vizinhosA[0] == "B");
+    assert(vizinhosA[0] == 2);
 
-    // Vizinhos de B devem ser A (da aresta não-dir) e C (da aresta dir)
-    std::vector<std::string> vizinhosB = listNeighbors("B");
+    // Vizinhos de 2 devem ser 1 (da aresta não-dir) e 3 (da aresta dir)
+    std::vector<int> vizinhosB = listNeighbors(2);
     assert(vizinhosB.size() == 2);
     std::cout << "OK!\n";
     printAdjacencyMatrix();
@@ -204,10 +204,10 @@ void MatrixGraph::runIntensiveTests() {
     // Teste 5: Remoção de Arestas
     // -----------------------------------------------------
     std::cout << "[Teste 5] Deletando arestas específicas... ";
-    // Remove a aresta não-direcionada A <-> B
-    deleteEdge("A", "B", false); 
-    assert(existsEdge("A", "B") == false);
-    assert(existsEdge("B", "A") == false);
+    // Remove a aresta não-direcionada 1 <-> 2
+    deleteEdge(1, 2, false); 
+    assert(existsEdge(1, 2) == false);
+    assert(existsEdge(2, 1) == false);
     std::cout << "OK!\n";
     printAdjacencyMatrix();
 
@@ -215,19 +215,19 @@ void MatrixGraph::runIntensiveTests() {
     // Teste 6: Remoção de Nós (O Teste mais crítico)
     // -----------------------------------------------------
     std::cout << "[Teste 6] Deletando no por completo e limpando matriz... ";
-    // Antes de deletar C: B->C existe (peso 50) e D<->C existe (peso 30)
-    assert(existsEdge("B", "C") == true);
-    assert(existsEdge("D", "C") == true);
+    // Antes de deletar 3: 2->3 existe (peso 50) e 4<->3 existe (peso 30)
+    assert(existsEdge(2, 3) == true);
+    assert(existsEdge(4, 3) == true);
 
-    // Deleta o nó C do mapa
-    deleteNode("C");
+    // Deleta o nó 3 do mapa
+    deleteNode(3);
 
-    // Agora, nenhuma menção a C deve existir nas arestas dos outros nós
-    assert(existsEdge("B", "C") == false);
-    assert(existsEdge("D", "C") == false);
-    
-    // O nó D que antes tinha C como vizinho, agora deve ter 0 vizinhos
-    std::vector<std::string> vizinhosD = listNeighbors("D");
+    // Agora, nenhuma menção a 3 deve existir nas arestas dos outros nós
+    assert(existsEdge(2, 3) == false);
+    assert(existsEdge(4, 3) == false);
+
+    // O nó 4 que antes tinha 3 como vizinho, agora deve ter 0 vizinhos
+    std::vector<int> vizinhosD = listNeighbors(4);
     assert(vizinhosD.empty());
     std::cout << "OK!\n";
     printAdjacencyMatrix();
@@ -239,7 +239,7 @@ void MatrixGraph::runIntensiveTests() {
 
 
 //grau de Saída
-size_t MatrixGraph::outDegree(std::string node) {
+size_t MatrixGraph::outDegree(int node) {
     // Se o nó não existir no grafo, o grau é zero
     if (graph.count(node) == 0) return 0;
     
@@ -249,19 +249,19 @@ size_t MatrixGraph::outDegree(std::string node) {
         if (!edge.second > 0) {
             degree++;
         }
-    }
+    }   
     return degree;
 }
 
 //grau de Entrada (auxiliada por IA na logica)
-size_t MatrixGraph::inDegree(std::string node) {
+size_t MatrixGraph::inDegree(int node) {
 
     if (graph.count(node) == 0) return 0;
 
     size_t degree = 0;
 
     for (const auto& rowPair : graph) {
-        std::string originNode = rowPair.first;
+        int originNode = rowPair.first;
         
         // Verificamos se esse nó de origem tem uma aresta apontando para o nosso 'node' alvo
         auto it = rowPair.second.find(node);
@@ -273,7 +273,7 @@ size_t MatrixGraph::inDegree(std::string node) {
 }
 
 //adjacência
-bool MatrixGraph::adjacent(std::string node1, std::string node2) {
+bool MatrixGraph::adjacent(int node1, int node2) {
 
     if (graph.count(node1) == 0 || graph.count(node2) == 0) return false;
 

@@ -9,41 +9,46 @@ class MatrixGraph {
 
 private:
 
-    std::unordered_map<std::string, std::unordered_map<std::string, size_t>> graph;
+    std::unordered_map<int, std::unordered_map<int, size_t>> graph;
 
     /*        [no1]  [no2]
         [no1] peso   peso
 
         [no2] peso   peso
     */
+   bool isDirected = false;
     
 
 public:
-    MatrixGraph(/* args */);
+    MatrixGraph();
     ~MatrixGraph();
 
+    //Manipulação Básica de Grafos
+    void appendNode(int node);
 
-    void appendNode(std::string node);
-
-    void appendEdge(std::string originNode, std::string TargetNode, size_t value, bool targeted = false);
+    void appendEdge(int originNode, int TargetNode, size_t value, bool targeted = false);
 
     void printAdjacencyMatrix() const; 
 
-    bool existsEdge(std::string originNode, std::string TargetNode);
+    //Consultas e Modificações de Grafos
 
-    void changeEdgeValue(std::string originNode, std::string TargetNode, size_t newValue);
+    bool existsEdge(int originNode, int TargetNode);
 
-    void deleteEdge(std::string originNode, std::string targetNode, bool targeted = false);
+    void changeEdgeValue(int originNode, int TargetNode, size_t newValue);
 
-    void deleteNode(std::string node);
+    void deleteEdge(int originNode, int targetNode, bool targeted = false);
 
-    std::vector<std::string> listNeighbors(std::string node);
+    void deleteNode(int node);
 
-    size_t outDegree(std::string node); //a implementar
-    size_t inDegree(std::string node);
-    bool adjacent(std::string node1, std::string node2);
+    //Informações para Vértices
 
-    //metodo implementado por IA, mas revisado
+    std::vector<int> listNeighbors(int node);
+
+    size_t outDegree(int node); //a implementar
+    size_t inDegree(int node);
+    bool adjacent(int node1, int node2);
+
+    //Utilitários de Testes, feito por IA, mas revisado
     void runIntensiveTests();
 };
 

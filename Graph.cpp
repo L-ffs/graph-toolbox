@@ -20,7 +20,7 @@ Graph::~Graph() {
     delete matrixGraph;
 }
 
-void Graph::appendNode(std::string node) {
+void Graph::appendNode(int node) {
     if (repType == Representation::LIST) {
         listGraph->appendNode(node);
     } else {
@@ -28,7 +28,7 @@ void Graph::appendNode(std::string node) {
     }
 }
 
-void Graph::appendEdge(std::string originNode, std::string TargetNode, size_t value) {
+void Graph::appendEdge(int originNode, int TargetNode, size_t value) {
     size_t actualValue = isWeighted ? value : 1;
 
     if (repType == Representation::LIST) {
@@ -48,7 +48,7 @@ void Graph::print() const {
     }
 }
 
-bool Graph::existsEdge(std::string originNode, std::string TargetNode) {
+bool Graph::existsEdge(int originNode, int TargetNode) {
     if (repType == Representation::LIST) {
         return listGraph->existsEdge(originNode, TargetNode);
     } else {
@@ -56,7 +56,7 @@ bool Graph::existsEdge(std::string originNode, std::string TargetNode) {
     }
 }
 
-void Graph::changeEdgeValue(std::string originNode, std::string TargetNode, size_t newValue) {
+void Graph::changeEdgeValue(int originNode, int TargetNode, size_t newValue) {
     if (!isWeighted) {
         std::cout << "Aviso: Tentando alterar peso em um grafo nao-ponderado. Operacao ignorada.\n";
         return;
@@ -69,7 +69,7 @@ void Graph::changeEdgeValue(std::string originNode, std::string TargetNode, size
     }
 }
 
-void Graph::deleteEdge(std::string originNode, std::string targetNode) {
+void Graph::deleteEdge(int originNode, int targetNode) {
     if (repType == Representation::LIST) {
         listGraph->deleteEdge(originNode, targetNode, isDirected);
     } else {
@@ -77,7 +77,7 @@ void Graph::deleteEdge(std::string originNode, std::string targetNode) {
     }
 }
 
-void Graph::deleteNode(std::string node) {
+void Graph::deleteNode(int node) {
     if (repType == Representation::LIST) {
         listGraph->deleteNode(node);
     } else {
@@ -85,7 +85,7 @@ void Graph::deleteNode(std::string node) {
     }
 }
 
-std::vector<std::string> Graph::listNeighbors(std::string node) {
+std::vector<int> Graph::listNeighbors(int node) {
     if (repType == Representation::LIST) {
         return listGraph->listNeighbors(node);
     } else {
@@ -105,7 +105,7 @@ void Graph::runTests() {
 }
 
 
-size_t Graph::outDegree(std::string node) {
+size_t Graph::outDegree(int node) {
     if (repType == Representation::LIST) {
 
         std::cout << "funçao nao implementada para esse tipo de estrutura";
@@ -115,7 +115,7 @@ size_t Graph::outDegree(std::string node) {
         return matrixGraph->outDegree(node);
     }
 }
-size_t Graph::inDegree(std::string node) {
+size_t Graph::inDegree(int node) {
 
     if (repType == Representation::LIST) {
         std::cout << "funçao nao implementada para esse tipo de estrutura";
@@ -124,7 +124,7 @@ size_t Graph::inDegree(std::string node) {
         return matrixGraph->inDegree(node);
     }
 }
-bool Graph::adjacent(std::string node1, std::string node2) {
+bool Graph::adjacent(int node1, int node2) {
 
     if (repType == Representation::LIST) {
         

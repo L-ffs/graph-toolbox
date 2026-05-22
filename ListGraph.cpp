@@ -7,12 +7,12 @@ ListGraph::ListGraph(){
 
 ListGraph::~ListGraph() {}
 
-void ListGraph::appendNode(std::string node){
+void ListGraph::appendNode(int node){
     std::vector<ListEdge> nulledges;
     graph[node]= nulledges;
 }
 
-void ListGraph::appendEdge(std::string originNode, std::string TargetNode, size_t value, bool targeted){
+void ListGraph::appendEdge(int originNode, int TargetNode, size_t value, bool targeted){
     ListEdge edge;
     edge.trgt_name= TargetNode;
     edge.value= value;
@@ -30,7 +30,7 @@ void ListGraph::appendEdge(std::string originNode, std::string TargetNode, size_
 
 void ListGraph::printAdjacencyList() const{
     for(const auto &pair : graph){
-        const std::string &node = pair.first;
+        const int &node = pair.first;
         const std::vector<ListEdge> &edges = pair.second;
 
         std::cout << node << ": ";
@@ -48,7 +48,7 @@ void ListGraph::printAdjacencyList() const{
     }
 }
 
-bool ListGraph::existsEdge(std::string originNode, std::string TargetNode) {
+bool ListGraph::existsEdge(int originNode, int TargetNode) {
 
         for ( ListEdge edge : graph[originNode]) {
             if (edge.trgt_name == TargetNode) {
@@ -58,7 +58,7 @@ bool ListGraph::existsEdge(std::string originNode, std::string TargetNode) {
         return false;
 }
 
-void ListGraph::changeEdgeValue(std::string originNode, std::string TargetNode, size_t newValue) {
+void ListGraph::changeEdgeValue(int originNode, int TargetNode, size_t newValue) {
 
     for (ListEdge &e : graph[originNode]) { //graph[originNode] é um vector
         if (e.trgt_name == TargetNode) {
@@ -76,7 +76,7 @@ void ListGraph::changeEdgeValue(std::string originNode, std::string TargetNode, 
     exit(-1); 
 }
 
-void ListGraph::deleteEdge(std::string originNode, std::string targetNode, bool targeted){
+void ListGraph::deleteEdge(int originNode, int targetNode, bool targeted){
 
     for (ListEdge &edge : graph[originNode]) {
         if (edge.trgt_name == targetNode) {
@@ -117,10 +117,10 @@ void ListGraph::deleteEdge(std::string originNode, std::string targetNode, bool 
     }
 }
 
-void ListGraph::deleteNode(std::string node) {
+void ListGraph::deleteNode(int node) {
     
     
-    std::vector<std::string> neighbors;
+    std::vector<int> neighbors;
     for (auto pair : graph) {
         if (pair.first == node){continue;} 
 
@@ -142,9 +142,9 @@ void ListGraph::deleteNode(std::string node) {
 
 }
 
-std::vector<std::string> ListGraph::listNeighbors(std::string node) {
+std::vector<int> ListGraph::listNeighbors(int node) {
 
-    std::vector<std::string> neighbors;
+    std::vector<int> neighbors;
     
     for (auto edge : graph[node]) {
         
