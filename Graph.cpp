@@ -135,4 +135,13 @@ bool Graph::adjacent(int node1, int node2) {
     }
 }
 
+size_t Graph::degree(int node) {
+    if(!isDirected){
+        return static_cast<size_t>(this->outDegree(node));
+    }
+    else{
+        return static_cast<size_t>(this->outDegree(node) + this->inDegree(node));
+    }
+}
+
 

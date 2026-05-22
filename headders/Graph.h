@@ -32,6 +32,7 @@ public:
     void runTests();
     size_t outDegree(int node);
     size_t inDegree(int node);
+    size_t degree(int node);
     bool adjacent(int node1, int node2);
 
 };

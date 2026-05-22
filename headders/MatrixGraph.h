@@ -16,11 +16,11 @@ private:
 
         [no2] peso   peso
     */
-   bool isDirected = false;
+   bool isDirected = true;
     
 
 public:
-    MatrixGraph();
+    MatrixGraph(bool directed = false);
     ~MatrixGraph();
 
     //Manipulação Básica de Grafos
@@ -50,6 +50,10 @@ public:
 
     //Utilitários de Testes, feito por IA, mas revisado
     void runIntensiveTests();
+
+    //Ordenação topológica (Utilizando ALgoritmo de Kahn, pois já identifica ciclos)
+    std::vector<int> topologicalSort() const;
+    bool isDAG() const {return !topologicalSort().empty();}// Retorna true se o grafo for um Grafo direcionado acíclico, ou seja, se a ordenação topológica é possível 
 };
 
 

@@ -1,8 +1,11 @@
 #include "headders/MatrixGraph.h"
 #include <iostream>
+#include <queue>
 
 // Construtor e Destrutor
-MatrixGraph::MatrixGraph() {}
+MatrixGraph::MatrixGraph(bool directed) {
+    isDirected = directed;
+}
 MatrixGraph::~MatrixGraph() {}
 
 //Adicionar um Nó
@@ -281,4 +284,55 @@ bool MatrixGraph::adjacent(int node1, int node2) {
     bool _2to1 = graph.at(node2).count(node1) && graph.at(node2).at(node1) > 0;
 
     return (_1to2 || _2to1);
+}
+
+//ordenacao topológica
+std::vector<int> MatrixGraph::topologicalSort() const{
+    if (!isDirected){
+        std::cout << "A Ordenação topológica só é aplicavel em grafos direcionados. Este Grafo é não Direcionado.\n";
+        return {};
+    }
+    
+    std::unordered_map<int, size_t> inDegree;
+    
+    //Este for serve para inicializar o mapa de graus de entrada, garantindo que todos os nós comecem com 0.
+    for (const auto& pair : graph) {
+        int node = pair.first;
+        inDegree[node] = 0; //
+    }
+
+    for (const auto&[u, neighbours] : graph) {
+        for (const auto&[v, peso]: neighbours){
+            if (peso > 0 && u != v) //u!=v para evitar loops
+                inDegree[v]++; // Incrementa o grau de entrada do nó v para cada aresta u->v
+        }
+    }
+
+    std::queue<int> q;
+    std::vector<int> topoOrder;
+
+    for (const auto& [node, degree]: inDegree){
+        if (degree == 0) {
+            q.push(node); // vértices que estejam isolados ou sem dependências entram direto na fila
+        }
+    }
+
+    while (!q.empty())
+    {
+        int current = q.front();
+        q.pop();
+        topoOrder.push_back(current);
+
+        for(const auto&[v, peso]: graph[current]){
+            if (peso > 0 && current != v){ //current != v para evitar loops
+                inDegree[v]--; // Reduz o grau de entrada dos vizinhos
+
+                if (inDegree[v] == 0) {
+                    q.push(v); // Se um vizinho ficar sem dependências, adiciona à fila
+                }
+            }
+        }
+    }
+    return (topoOrder.size() == graph.size()) ? topoOrder : std::vector<int>(); // Se topoOrder não incluir todos os nós, há um ciclo, e retornamos vetor vazio
+
 }
