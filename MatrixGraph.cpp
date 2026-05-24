@@ -352,8 +352,15 @@ std::vector<int> MatrixGraph::topologicalSort() const
         {
             int v = neighbourPair.first;
             size_t peso = neighbourPair.second;
-            if (peso > 0 && u != v) // u!=v para evitar loops
-                inDegree[v]++;      // Incrementa o grau de entrada do nó v para cada aresta u->v
+            if (peso > 0)
+            {
+                // Detecta self-loop como ciclo
+                if (u == v)
+                {
+                    return std::vector<int>();
+                }
+                inDegree[v]++; // Incrementa o grau de entrada do nó v para cada aresta u->v
+            }
         }
     }
 
