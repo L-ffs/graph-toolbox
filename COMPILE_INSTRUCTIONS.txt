@@ -9,7 +9,7 @@ Passos rápidos:
 1) Abra o terminal na pasta do projeto;
 2) Compile tudo com g++:
 
-g++ GrafoWrapper.cpp Graph.cpp GraphReader.cpp ListGraph.cpp MatrixGraph.cpp TestAll.cpp main.cpp -Iheadders -std=c++17 -O2 -o main.exe
+g++ GraphWarper.cpp Graph.cpp GraphReader.cpp ListGraph.cpp MatrixGraph.cpp TestAll.cpp main.cpp -Iheadders -std=c++17 -O2 -o main.exe
 
 3) Rode o programa com o arquivo de exemplo:
 .\main.exe GraphFile_Model.graph
