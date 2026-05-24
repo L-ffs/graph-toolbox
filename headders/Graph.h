@@ -21,19 +21,20 @@ public:
     Graph(Representation rep, bool directed, bool weighted);
     ~Graph();
 
-    void appendNode(int node);
-    void appendEdge(int originNode, int TargetNode, size_t value = 1);
+    void appendNode(std::string node);
+    void appendEdge(std::string originNode, std::string TargetNode, size_t value = 1);
     void print() const;
-    bool existsEdge(int originNode, int TargetNode);
-    void changeEdgeValue(int originNode, int TargetNode, size_t newValue);
-    void deleteEdge(int originNode, int targetNode);
-    void deleteNode(int node);
-    std::vector<int> listNeighbors(int node);
+    bool existsEdge(std::string originNode, std::string TargetNode);
+    void changeEdgeValue(std::string originNode, std::string TargetNode, size_t newValue);
+    void deleteEdge(std::string originNode, std::string targetNode);
+    void deleteNode(std::string node);
+    std::vector<std::string> listNeighbors(std::string node);
     void runTests();
-    size_t outDegree(int node);
-    size_t inDegree(int node);
-    size_t degree(int node);
-    bool adjacent(int node1, int node2);
+    size_t outDegree(std::string node);
+    size_t inDegree(std::string node);
+    size_t degree(std::string node);
+    bool adjacent(std::string node1, std::string node2);
+    std::vector<std::string> topologicalSort() const;
 
 };
 
