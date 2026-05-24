@@ -10,7 +10,7 @@ Graph::Graph(Representation rep, bool directed, bool weighted)
     if (repType == Representation::LIST) {
         listGraph = new ListGraph();
     } else {
-        matrixGraph = new MatrixGraph();
+        matrixGraph = new MatrixGraph(directed);
     }
 }
 
