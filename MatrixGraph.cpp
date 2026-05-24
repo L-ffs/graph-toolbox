@@ -313,10 +313,12 @@ size_t MatrixGraph::inDegree(int node)
 // adjacência
 bool MatrixGraph::adjacent(int node1, int node2)
 {
-    if (graph.count(node1) == 0 || graph.count(node2) == 0) return false;
+    if (graph.count(node1) == 0 || graph.count(node2) == 0)
+        return false;
 
     bool forward = graph.at(node1).count(node2) && graph.at(node1).at(node2) > 0;
-    if (isDirected) {
+    if (isDirected)
+    {
         return forward;
     }
 
