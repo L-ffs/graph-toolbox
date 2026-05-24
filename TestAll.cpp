@@ -358,11 +358,23 @@ void TestAll::testAll() {
 
     // Ordenação topológica do grafo orientado (se aplicável)
     try {
-        cout << "\n>> ORDENACAO TOPOLOGICA (GRAFO ORIENTADO):\n";
-        auto topo = gOrientado.ordenacaoTopologica();
+        cout << "\n>> ORDENACAO TOPOLOGICA (GRAFO NAO ORIENTADO):\n";
+        auto topoNao = gNaoOrientado.ordenacaoTopologica();
         cout << "  Resultado: [";
-        for (size_t i = 0; i < topo.size(); ++i) {
-            cout << topo[i] << (i + 1 == topo.size() ? "" : ", ");
+        for (size_t i = 0; i < topoNao.size(); ++i) {
+            cout << topoNao[i] << (i + 1 == topoNao.size() ? "" : ", ");
+        }
+        cout << "]\n";
+    } catch (...) {
+        cout << "  Falha ao calcular ordenacao topologica (comum em grafos nao orientados)\n";
+    }
+
+    try {
+        cout << "\n>> ORDENACAO TOPOLOGICA (GRAFO ORIENTADO):\n";
+        auto topoSim = gOrientado.ordenacaoTopologica();
+        cout << "  Resultado: [";
+        for (size_t i = 0; i < topoSim.size(); ++i) {
+            cout << topoSim[i] << (i + 1 == topoSim.size() ? "" : ", ");
         }
         cout << "]\n";
     } catch (...) {
