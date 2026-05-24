@@ -1,4 +1,4 @@
-#include "headders/GrafoWrapper.h"
+#include "headders/GraphWrapper.h"
 
 // usando matriz pq as funcoes de grau e adjacencia estao implementadas nessa representacao
 GrafoWrapper::GrafoWrapper(bool orientado)
