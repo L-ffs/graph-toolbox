@@ -7,12 +7,17 @@
 #include <cstddef>
 #include <string>
 #include <vector>
+#include <unordered_map>
 
 using namespace std;
 
-class GrafoWrapper {
+class GrafoWrapper
+{
 private:
     Graph graph;
+    std::unordered_map<std::string, int> nameToId;
+    std::vector<std::string> idToName;
+    int nextId = 0;
 
 public:
     GrafoWrapper(bool orientado);
@@ -27,7 +32,7 @@ public:
     void removerAresta(string origem, string destino);
     void removerVertice(string vertice);
     void exibirGrafo() const;
-    vector<string> ordenacaoTopologica() const;
+    std::vector<std::string> ordenacaoTopologica() const;
 };
 
 #endif
