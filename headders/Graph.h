@@ -5,6 +5,7 @@
 #include "ListGraph.h"
 #include "MatrixGraph.h"
 #include <iostream>
+#include <vector>
 
 enum class Representation { LIST, MATRIX };
 
@@ -34,6 +35,7 @@ public:
     size_t inDegree(int node);
     size_t degree(int node);
     bool adjacent(int node1, int node2);
+    std::vector<int> topologicalSort() const;
 
 };
 

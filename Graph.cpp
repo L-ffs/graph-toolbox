@@ -198,3 +198,11 @@ size_t Graph::degree(int node)
         return static_cast<size_t>(this->outDegree(node) + this->inDegree(node));
     }
 }
+
+std::vector<int> Graph::topologicalSort() const {
+    if (repType == Representation::LIST) {
+        return {};
+    } else {
+        return matrixGraph->topologicalSort();
+    }
+}

@@ -356,6 +356,19 @@ void TestAll::testAll() {
         excecoes++;
     }
 
+    // Ordenação topológica do grafo orientado (se aplicável)
+    try {
+        cout << "\n>> ORDENACAO TOPOLOGICA (GRAFO ORIENTADO):\n";
+        auto topo = gOrientado.ordenacaoTopologica();
+        cout << "  Resultado: [";
+        for (size_t i = 0; i < topo.size(); ++i) {
+            cout << topo[i] << (i + 1 == topo.size() ? "" : ", ");
+        }
+        cout << "]\n";
+    } catch (...) {
+        cout << "  Falha ao calcular ordenacao topologica\n";
+    }
+
     cout << "==================================================\n";
     cout << "         RESUMO FINAL DA BATERIA DE TESTES        \n";
     cout << "==================================================\n";

@@ -32,6 +32,7 @@ public:
     void removerAresta(string origem, string destino);
     void removerVertice(string vertice);
     void exibirGrafo() const;
+    std::vector<std::string> ordenacaoTopologica() const;
 };
 
 #endif
