@@ -6,25 +6,23 @@
 
 // Nós são representados por inteiros internamente
 
-
-
-
-class ListEdge {
+class ListEdge
+{
 public:
     int trgt; // id do nó alvo
     size_t value;
-    bool operator==(const ListEdge &other) const {
+    bool operator==(const ListEdge &other) const
+    {
         return (trgt == other.trgt && value == other.value);
     }
 };
 
-class ListGraph {
+class ListGraph
+{
 private:
-
     std::unordered_map<int, std::vector<ListEdge>> graph; // map [node id] -> lista de arestas
 
 public:
-
     ListGraph();
 
     ~ListGraph();
@@ -45,7 +43,5 @@ public:
 
     std::vector<int> listNeighbors(int node);
 };
-
-
 
 #endif

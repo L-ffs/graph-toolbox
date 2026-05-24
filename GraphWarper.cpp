@@ -101,8 +101,10 @@ std::vector<std::string> GrafoWrapper::ordenacaoTopologica() const
 {
     std::vector<std::string> result;
     std::vector<int> ids = graph.topologicalSort();
-    if (ids.empty()) return result;
-    for (int id : ids) {
+    if (ids.empty())
+        return result;
+    for (int id : ids)
+    {
         if (id >= 0 && id < (int)idToName.size() && !idToName[id].empty())
             result.push_back(idToName[id]);
         else
