@@ -17,17 +17,16 @@ private:
 public:
     GrafoWrapper(bool orientado);
 
-    void inserirVertice(int vertice);
-    void inserirAresta(int origem, int destino, size_t peso = 1);
-    bool verificarAresta(int origem, int destino);
-    void alterarPesoAresta(int origem, int destino, size_t peso);
-    size_t grauVertice(int vertice);
-    vector<int> listarVizinhos(int vertice);
-    bool saoAdjacentes(int origem, int destino);
-    void removerAresta(int origem, int destino);
-    void removerVertice(int vertice);
+    void inserirVertice(string vertice);
+    void inserirAresta(string origem, string destino, size_t peso = 1);
+    bool verificarAresta(string origem, string destino);
+    void alterarPesoAresta(string origem, string destino, size_t peso);
+    size_t grauVertice(string vertice);
+    vector<string> listarVizinhos(string vertice);
+    bool saoAdjacentes(string origem, string destino);
+    void removerAresta(string origem, string destino);
+    void removerVertice(string vertice);
     void exibirGrafo() const;
-    vector<int> ordemTopologica() const;
 };
 
 #endif

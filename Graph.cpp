@@ -144,7 +144,4 @@ size_t Graph::degree(int node) {
     }
 }
 
-std::vector<int> Graph::topologicalSort() const {
-        return matrixGraph->topologicalSort();
-}
 

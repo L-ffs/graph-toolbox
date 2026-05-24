@@ -5,47 +5,43 @@ GrafoWrapper::GrafoWrapper(bool orientado)
     : graph(Representation::MATRIX, orientado, true) {
 }
 
-void GrafoWrapper::inserirVertice(int vertice) {
+void GrafoWrapper::inserirVertice(string vertice) {
     graph.appendNode(vertice);
 }
 
-void GrafoWrapper::inserirAresta(int origem, int destino, size_t peso) {
+void GrafoWrapper::inserirAresta(string origem, string destino, size_t peso) {
     //talvez tenha que ajustar tipagem se a professora pedir int para vertce e double para peso
     graph.appendEdge(origem, destino, peso);
 }
 
-bool GrafoWrapper::verificarAresta(int origem, int destino) {
+bool GrafoWrapper::verificarAresta(string origem, string destino) {
     return graph.existsEdge(origem, destino);
 }
 
-void GrafoWrapper::alterarPesoAresta(int origem, int destino, size_t peso) {
+void GrafoWrapper::alterarPesoAresta(string origem, string destino, size_t peso) {
     graph.changeEdgeValue(origem, destino, peso);
 }
 
-size_t GrafoWrapper::grauVertice(int vertice) {
+size_t GrafoWrapper::grauVertice(string vertice) {
     return graph.outDegree(vertice);
 }
 
-vector<int> GrafoWrapper::listarVizinhos(int vertice) {
+vector<string> GrafoWrapper::listarVizinhos(string vertice) {
     return graph.listNeighbors(vertice);
 }
 
-bool GrafoWrapper::saoAdjacentes(int origem, int destino) {
+bool GrafoWrapper::saoAdjacentes(string origem, string destino) {
     return graph.adjacent(origem, destino);
 }
 
-void GrafoWrapper::removerAresta(int origem, int destino) {
+void GrafoWrapper::removerAresta(string origem, string destino) {
     graph.deleteEdge(origem, destino);
 }
 
-void GrafoWrapper::removerVertice(int vertice) {
+void GrafoWrapper::removerVertice(string vertice) {
     graph.deleteNode(vertice);
 }
 
 void GrafoWrapper::exibirGrafo() const {
     graph.print();
-}
-
-vector<int> GrafoWrapper::ordemTopologica() const {
-    return graph.topologicalSort();
 }
