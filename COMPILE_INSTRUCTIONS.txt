@@ -11,5 +11,8 @@ Passos rápidos:
 
 g++ GraphWarper.cpp Graph.cpp GraphReader.cpp ListGraph.cpp MatrixGraph.cpp TestAll.cpp main.cpp -Iheadders -std=c++17 -O2 -o main.exe
 
-3) Rode o programa com o arquivo de exemplo:
+3) Para Windowns, Rode o programa com o arquivo de exemplo:
 .\main.exe GraphFile_Model.graph
+
+Já para Linux rode:
+g++ *.cpp -o main && ./main
