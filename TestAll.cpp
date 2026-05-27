@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <iostream>
 #include <vector>
+#include <unordered_map>
 
 using namespace std;
 
@@ -379,6 +380,49 @@ void TestAll::testAll() {
         cout << "]\n";
     } catch (...) {
         cout << "  Falha ao calcular ordenacao topologica\n";
+    }
+
+    // Teste adicional: Ordenacao topologica em um DAG isolado (valida apenas a propriedade de precedencia)
+    try {
+        cout << "\n[TESTE] Ordenacao Topologica em DAG isolado:\n";
+        GrafoWrapper gTopo(true);
+        std::vector<std::string> verts = {"A", "B", "C", "D", "E"};
+        for (const auto &v : verts) gTopo.inserirVertice(v);
+        // Define arestas A->B, A->C, B->D, C->D, D->E (DAG)
+        gTopo.inserirAresta("A", "B", 1);
+        gTopo.inserirAresta("A", "C", 1);
+        gTopo.inserirAresta("B", "D", 1);
+        gTopo.inserirAresta("C", "D", 1);
+        gTopo.inserirAresta("D", "E", 1);
+
+        auto topo = gTopo.ordenacaoTopologica();
+        cout << "  Resultado: [";
+        for (size_t i = 0; i < topo.size(); ++i) {
+            cout << topo[i] << (i + 1 == topo.size() ? "" : ", ");
+        }
+        cout << "]\n";
+
+        bool valido = false;
+        if (!topo.empty()) {
+            std::unordered_map<std::string, size_t> pos;
+            for (size_t i = 0; i < topo.size(); ++i) pos[topo[i]] = i;
+            std::vector<std::pair<std::string, std::string>> edges = {{"A","B"},{"A","C"},{"B","D"},{"C","D"},{"D","E"}};
+            valido = true;
+            for (const auto &e : edges) {
+                if (pos[e.first] >= pos[e.second]) { valido = false; break; }
+            }
+        }
+
+        if (valido) {
+            cout << "  STATUS:         PASSOU\n\n";
+            passou++;
+        } else {
+            cout << "  STATUS:         FALHOU\n\n";
+            falhou++;
+        }
+    } catch (...) {
+        cout << "  Falha ao calcular ordenacao topologica em DAG\n  STATUS:         FALHOU\n\n";
+        falhou++;
     }
 
     cout << "==================================================\n";
