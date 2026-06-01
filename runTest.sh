@@ -1,4 +1,4 @@
-g++ main.cpp ListGraph.cpp -o teste
+g++ *.cpp -o teste
 chmod +x teste
 ./teste
 echo "teste concluido"

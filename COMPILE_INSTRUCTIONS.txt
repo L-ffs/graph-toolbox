@@ -16,3 +16,7 @@ g++ GraphWarper.cpp Graph.cpp GraphReader.cpp ListGraph.cpp MatrixGraph.cpp Test
 
 Já para Linux rode:
 g++ *.cpp -o main && ./main
+
+ou:
+
+chmod +x runTest.sh && ./runTest.sh
