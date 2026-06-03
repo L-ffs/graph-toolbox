@@ -1,5 +1,6 @@
-g++ *.cpp -o teste
-chmod +x teste
-./teste
-echo "teste concluido"
-rm teste
+echo "iniciando compilador e rodando"
+g++ *.cpp -o testeExecuçcao
+chmod +x testeExecuçcao
+./testeExecuçcao
+echo "arquivo execultado com sucesso\n"
+rm testeExecuçcao

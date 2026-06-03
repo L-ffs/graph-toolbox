@@ -9,7 +9,7 @@ class MatrixGraph
 {
 
 private:
-    std::unordered_map<int, std::unordered_map<int, size_t>> graph;
+    std::unordered_map<     int    , std::unordered_map<int, size_t>    > graph;
 
     /*        [no1]  [no2]
         [no1] peso   peso
