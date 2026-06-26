@@ -1,5 +1,5 @@
-#include "headders/TestAll.h"
-#include "headders/GraphWrapper.h"
+#include "../headders/TestAll.h"
+#include "../headders/GraphWrapper.h"
 #include <algorithm>
 #include <iostream>
 #include <vector>

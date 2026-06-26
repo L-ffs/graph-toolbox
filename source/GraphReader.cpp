@@ -1,5 +1,5 @@
-#include "headders/GraphReader.h"
-#include "headders/Graph.h"
+#include "../headders/GraphReader.h"
+#include "../headders/Graph.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
